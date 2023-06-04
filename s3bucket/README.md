@@ -1,3 +1,4 @@
+This is for outputing attributes of a resource as well
 #AWS S3 bucket-->bucket.tf------------------
 
 provider "aws" {
