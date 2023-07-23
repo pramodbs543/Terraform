@@ -1,4 +1,4 @@
-#This VPC does not include NAT gateway
+
 resource "aws_vpc" "my_vpc" {
   cidr_block = "10.0.0.0/16"  # Replace with your desired CIDR block
   enable_dns_support   = true
@@ -33,6 +33,19 @@ resource "aws_internet_gateway" "vpc_igw" {
   }
 }
 
+resource "aws_eip" "nat" {
+  domain                    = "vpc"
+
+}
+
+resource "aws_nat_gateway" "gw" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public.id
+
+  tags = {
+    Name = "Lambda-NAT-gw"
+  }
+}
 resource "aws_route_table" "public_rt" {
   vpc_id = aws_vpc.my_vpc.id
 
