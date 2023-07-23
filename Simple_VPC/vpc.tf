@@ -69,9 +69,9 @@ resource "aws_route_table" "private_rt" {
   }
 }
 resource "aws_route" "private" {
-  route_table_id         = "aws_route_table.private_rt.id"
+  route_table_id         = aws_route_table.private_rt.id
   destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = "${aws_nat_gateway.gw.id}"
+  gateway_id             = aws_nat_gateway.gw.id
 }
 
 resource "aws_route_table_association" "private-association" {
