@@ -43,7 +43,7 @@ resource "aws_nat_gateway" "gw" {
   subnet_id     = aws_subnet.public.id
 
   tags = {
-    Name = "Lambda-NAT-gw"
+    Name = "${var.project}-natgw"
   }
 }
 resource "aws_route_table" "public_rt" {
